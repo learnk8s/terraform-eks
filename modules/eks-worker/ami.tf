@@ -1,7 +1,5 @@
 data "aws_ami" "eks_worker_ami" {
     most_recent = true
-    # executable_users = ["self"]
-    # owners = ["amazon"]
 
     filter {
         name = "name"
