@@ -30,7 +30,7 @@ module "eks_worker" {
   aws_region = "${var.aws_region}"
 
   cluster_name        = "${module.eks_master.cluster_name}"
-  worker_security_gps = "${module.eks_master.worker_security_gps}"
+  worker_security_gps = ["${module.eks_master.worker_security_gps}"]
   iam_role_name       = "${module.eks_master.worker_iam_role_name}"
   subnet_ids          = "${module.network.vpc_private_subnets}"
 

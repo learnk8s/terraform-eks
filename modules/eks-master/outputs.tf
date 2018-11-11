@@ -3,7 +3,7 @@ output "cluster_name" {
 }
 
 output "worker_security_gps" {
-  value = "${list(aws_security_group.workers.id)}"
+  value = "${aws_security_group.workers.id}"
 }
 
 output "worker_iam_role_name" {
