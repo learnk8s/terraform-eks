@@ -1,5 +1,5 @@
 output "cluster_name" {
-  value = "${var.project}-${var.env}"
+  value = "${aws_eks_cluster.eks.id}"
 }
 
 output "worker_security_gps" {

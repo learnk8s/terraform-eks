@@ -44,6 +44,7 @@ resource "aws_autoscaling_group" "asg_gp" {
 
   tags = ["${list(
     map("key", "Name", "value", "${var.cluster_name}-${var.worker_name}", "propagate_at_launch", true),
+    map("key", "NodeGroup", "value", "${var.worker_name}", "propagate_at_launch", true),
     map("key", "Project", "value", "${var.project}", "propagate_at_launch", true),
     map("key", "Env", "value", "${var.env}", "propagate_at_launch", true),
     map("key", "kubernetes.io/cluster/${var.cluster_name}", "value", "owned", "propagate_at_launch", true)
