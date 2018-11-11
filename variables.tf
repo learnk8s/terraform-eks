@@ -2,6 +2,7 @@
 variable "aws_region" {
   description = "The AWS region to build network infrastructure"
   type        = "string"
+  default     = "eu-west-1"
 }
 
 variable "project" {
@@ -52,4 +53,5 @@ variable "lb_sg_ids" {
 variable "key_pair_name" {
   description = "SSH key pair for instance access"
   type        = "string"
+  default     = ""
 }

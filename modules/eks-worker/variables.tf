@@ -54,6 +54,7 @@ variable "worker_security_gps" {
 variable "key_pair_name" {
   description = "SSH key pair for instance access"
   type        = "string"
+  default     = ""
 }
 
 variable "asg_instance_type" {

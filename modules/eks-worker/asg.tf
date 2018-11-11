@@ -15,9 +15,8 @@ resource "aws_launch_configuration" "worker_launch_config" {
 
   user_data = "${data.template_file.user_data.rendered}"
 
-  key_name                    = "${var.key_pair_name}"
-  security_groups             = ["${var.worker_security_gps}"]
-  associate_public_ip_address = true
+  key_name        = "${var.key_pair_name}"
+  security_groups = ["${var.worker_security_gps}"]
 
   root_block_device {
     volume_type = "${var.root_volume_type}"
