@@ -87,10 +87,20 @@ $ helm init --service-account tiller
 - Setup [ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
 
 ```
-helm install stable/nginx-ingress \
+$ helm install stable/nginx-ingress \
   --name my-nginx
   --set rbac.create=true
   --namespace ingress-nginx
+
+# Wait until see External IP from `nginx-ingress-controller`
+$ kubectl get svc -n ingress-nginx -w
+NAME                                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)                      AGE
+my-nginx-nginx-ingress-controller        LoadBalancer   172.20.146.138   xxx-xxx.eu-west-1.elb.amazonaws.com   80:30143/TCP,443:30553/TCP   8s
+my-nginx-nginx-ingress-default-backend   ClusterIP      172.20.80.88     <none>                                                                   80/TCP                       8s
+
+# Get default 404 from External IP
+$ curl xxx-xxx.eu-west-1.elb.amazonaws.com
+default backend - 404
 ```
 
 - Setup [external-dns](https://github.com/kubernetes-incubator/external-dns)
