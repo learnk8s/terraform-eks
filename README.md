@@ -62,3 +62,35 @@ NAME                                       STATUS    ROLES     AGE       VERSION
 ip-10-0-70-17.eu-west-1.compute.internal   Ready     <none>    35s       v1.10.3
 ```
 
+## Setup for alb-ingress-controller
+
+- Setup [Helm](https://helm.sh/) in k8s cluster
+```
+$ kubectl create serviceaccount tiller --namespace kube-system
+$ echo "apiVersion: v1
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-role-binding
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: tiller
+  namespace: kube-system" | kubectl apply -f -
+
+$ helm init --service-account tiller
+```
+
+- Setup [ingress-nginx](https://github.com/kubernetes/ingress-nginx/)
+
+```
+helm install stable/nginx-ingress \
+  --name my-nginx
+  --set rbac.create=true
+  --namespace ingress-nginx
+```
+
+- Setup [external-dns](https://github.com/kubernetes-incubator/external-dns)
