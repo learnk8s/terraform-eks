@@ -43,15 +43,8 @@ variable "config_output_path" {
   default     = ".terraform"
 }
 
-variable "lb_sg_ids" {
-  description = "The security group id which used by load balancer"
-  type        = "list"
-  default     = []
-}
-
 ## EKS worker
 variable "key_pair_name" {
   description = "SSH key pair for instance access"
   type        = "string"
-  default     = ""
 }

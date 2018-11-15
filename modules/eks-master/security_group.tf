@@ -83,15 +83,3 @@ resource "aws_security_group_rule" "workers_ingress_ssh" {
   to_port           = 22
   type              = "ingress"
 }
-
-resource "aws_security_group_rule" "worker_ingress_lb" {
-  count = "${length(var.lb_sg_ids)}"
-
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.workers.id}"
-  source_security_group_id = "${var.lb_sg_ids[count.index]}"
-
-  protocol  = "tcp"
-  from_port = 30000
-  to_port   = 32767
-}

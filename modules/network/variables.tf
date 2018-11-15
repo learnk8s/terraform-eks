@@ -46,9 +46,3 @@ variable "config_output_path" {
   type        = "string"
   default     = ".terraform"
 }
-
-variable "lb_sg_ids" {
-  description = "The security group id which used by load balancer"
-  type        = "list"
-  default     = []
-}

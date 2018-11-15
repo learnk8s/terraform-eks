@@ -14,10 +14,6 @@ Initializing modules...
 ...
 Terraform has been successfully initialized!
 
-# update required parameters
-$ cp terraform.tfvars.sample terraform.tfvars
-$ vim terraform.tfvars
-
 # enter SSH key pair and check aws resources to be created
 $ terraform plan
 var.key_pair_name
