@@ -64,3 +64,22 @@ resource "aws_iam_role_policy_attachment" "workers_AmazonEC2ContainerRegistryRea
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = "${aws_iam_role.workers.name}"
 }
+
+### Policy for external-dns
+### https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/aws.md
+data "template_file" "external_dns_policy" {
+  template = "${file("${path.module}/resources/external-dns-iam-policy.json")}"
+}
+
+resource "aws_iam_policy" "external_dns_policy" {
+  name_prefix = "${var.project}-${var.env}-external-dns-"
+  path        = "/"
+  description = "For External DNS (https://github.com/kubernetes-incubator/external-dns)"
+
+  policy = "${data.template_file.external_dns_policy.rendered}"
+}
+
+resource "aws_iam_role_policy_attachment" "workers_externalDNSPolicy" {
+  policy_arn = "${aws_iam_policy.external_dns_policy.arn}"
+  role       = "${aws_iam_role.workers.name}"
+}
